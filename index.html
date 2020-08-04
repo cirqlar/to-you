@@ -13,6 +13,10 @@
             <todo-form v-on:submit="submit">
 
             </todo-form>
+
+            <todo-list v-bind:todos="todos" v-bind:destroy='destroy'>
+
+            </todo-list>
         </div>
 
 
