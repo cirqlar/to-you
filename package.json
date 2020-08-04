@@ -1,0 +1,20 @@
+{
+  "name": "to-you",
+  "version": "0.0.0",
+  "description": "A vue todo app",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vue",
+    "todo",
+    "tailwind"
+  ],
+  "author": "cirqlar",
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^0.12.3"
+  }
+}
