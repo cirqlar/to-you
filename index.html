@@ -10,8 +10,7 @@
     </head>
     <body class="h-screen relative">
         <div id="app">
-            {{ message }}
-            <todo-form>
+            <todo-form v-on:submit="submit">
 
             </todo-form>
         </div>
