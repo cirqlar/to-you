@@ -9,14 +9,18 @@
         <link href="./style.css" rel="stylesheet">
     </head>
     <body class="h-screen relative">
-        <div id="app">
-            <todo-form v-on:submit="submit">
+        <div id="app" class="flex flex-col min-h-screen">
+            <todo-form v-bind:class="['flex-none']" v-on:submit="submit">
 
             </todo-form>
 
-            <todo-list v-bind:todos="todos" v-bind:destroy='destroy'>
+            <todo-list v-bind:class="['flex-auto']" v-bind:todos="todos" v-bind:destroy='destroy'>
 
             </todo-list>
+
+            <div class="flex-none text-sm text-center p-4">
+                Made by <a class="text-blue-500 hover:text-blue-700 focus:text-blue-700 transition-colors duration-150" href="https://github.com/cirqlar">cirqlar</a>. <a class="text-blue-500 hover:text-blue-700 focus:text-blue-700 transition-colors duration-150" href="#">View on Github</a>
+            </div>
         </div>
 
 

@@ -3,12 +3,31 @@ Vue.component('todo-form', {
     return {
       id: null,
       title: "",
+      date: (new Date()).toISOString().substr(0,10),
+      errors: [],
+      disabled: true,
     }
   },
   methods: {
     sub(event) {
-      this.$emit('submit', this.todo);
-      event.target.reset();
+      if (this.title != "") {
+        this.errors = []
+        this.$emit('submit', this.todo);
+
+        // Clear form
+        this.title = "";
+        this.date = (new Date()).toISOString().substr(0,10);
+      } else {
+        this.errors = ["Title cannot be blank"];
+      }
+    }
+  },
+  watch: {
+    title: function(val) {
+      if (val == "")
+        this.disabled = true;
+      else
+        this.disabled = false;
     }
   },
   computed: {
@@ -16,13 +35,32 @@ Vue.component('todo-form', {
       return {
         title: this.title,
         id: this.id,
+        date: this.date,
       }
     }
   },
   template: `
-    <form v-on:submit.prevent="sub">
-      <input v-model="title" type="text"/>
-      <input type="submit" value="Submit meeeee"/>
+    <form
+      v-on:submit.prevent="sub"
+      class="p-4 border-b flex flex-wrap"
+    >
+      <ul v-if="errors.length > 0">
+        <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+      </ul>
+      <input
+        class='w-full flex-none border rounded px-3 py-2 focus:border-blue-500 transition-colors duration-150 outline-none'
+        v-model="title"
+        placeholder="Type something..."
+        type="text"/>
+      <input
+        class='flex-auto mt-4 border rounded px-3 py-2 focus:border-blue-500 transition-colors duration-150 outline-none'
+        v-model="date"
+        type="date"/>
+      <input
+        class="ml-2 mt-4 px-3 py-2 rounded bg-blue-500 hover:bg-blue-700 focus:bg-blue-700 text-white cursor-pointer disabled:bg-gray-200 disabled:text-gray-600 disabled:cursor-not-allowed"
+        v-bind:disabled="disabled"
+        type="submit"
+        value="Add"/>
     </form>
   `
 });
@@ -30,7 +68,6 @@ Vue.component('todo-form', {
 Vue.component('todo', {
   data: function() {
     return {
-      placeholder: 1,
     }
   }
   ,
@@ -46,13 +83,17 @@ Vue.component('todo', {
 Vue.component('todo-list', {
   data: function() {
     return {
-      placeholder: 1,
     }
   },
   props: ['todos', 'destroy'],
   template: `
-    <div>
+    <div v-if='todos.length > 0'>
       <todo v-for="todo in todos" v-bind:todo='todo' v-on:destroy="destroy" v-bind:key="todo.id"></todo>
+    </div>
+    <div
+      class="w-full h-full text-center flex justify-center items-center text-gray-600"
+      v-else>
+      Nothing here yet.
     </div>
   `
 })

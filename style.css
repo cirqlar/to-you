@@ -1,0 +1,11 @@
+.disabled\:bg-gray-200:disabled {
+    background-color: #edf2f7;
+}
+
+.disabled\:text-gray-600:disabled {
+    color: #718096;
+}
+
+.disabled\:cursor-not-allowed:disabled {
+    cursor: not-allowed;
+}
