@@ -9,3 +9,7 @@
 .disabled\:cursor-not-allowed:disabled {
     cursor: not-allowed;
 }
+
+.template-auto-fill {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 300px));
+}
