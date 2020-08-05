@@ -62,7 +62,7 @@ Vue.component('todo-form', {
         <option v-for='(color, name) in categories' v-bind:value='name'>{{name}}</option>
       </select>
       <input
-        class='flex-auto mt-4 border rounded px-3 py-2 focus:border-blue-500 transition-colors duration-150 outline-none sm:ml-2'
+        class='flex-auto mt-4 border rounded px-3 py-2 bg-white focus:border-blue-500 transition-colors duration-150 outline-none sm:ml-2'
         v-model="date"
         type="date"/>
       <input
@@ -177,7 +177,7 @@ Vue.component('category-list', {
         <span class=''>Categories: </span>
         <category-item
           v-for='(color, name) in categories'
-          class='ml-2'
+          class='ml-2 flex-none'
           v-bind:key="name"
           v-bind:color="color"
           v-bind:name="name"
