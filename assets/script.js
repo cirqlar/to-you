@@ -52,7 +52,8 @@ Vue.component('todo-form', {
       </ul>
       <input
         class='w-full flex-none border rounded px-3 py-2 focus:border-blue-500 transition-colors duration-150 outline-none'
-        v-model="title"
+        :value="title"
+        @input="title = $event.target.value"
         placeholder="Type something..."
         type="text"/>
       <select
@@ -94,7 +95,65 @@ Vue.component('category-item', {
       {{name}}
     </button>
   `
-})
+});
+
+Vue.component('category-form', {
+  data: function() {
+    return {
+      name: "",
+      colors: ['gray', 'red', 'orange', 'yellow', 'green', 'teal', 'blue', 'indigo', 'purple', 'pink'],
+      color: 'blue',
+      errors: [],
+      disabled: true,
+    }
+  },
+  computed: {
+    category: function() {
+      return {
+        name: this.name,
+        color: this.color,
+      }
+    }
+  },
+  watch: {
+    name: function(val) {
+      if (val == "") {
+        this.disabled = true;
+      } else {
+        this.disabled = false;
+      }
+    }
+  },
+  methods: {
+    sub() {
+      if (this.name == "") {
+        alert("Name can't be blank");
+      } else {
+        this.$emit('submit', this.category);
+
+        this.name = "";
+      }
+    }
+  },
+  template: `
+    <form
+      class="ml-2 inline-flex min-w-100px max-w-90vw"
+      @submit.prevent="sub">
+      <input
+        class="text-sm w-1/2 px-2 py-1 rounded border focus:border-blue-500 transition-colors duration-150 outline-none" 
+        type="text" :value='name' @input="name = $event.target.value" />
+      <select
+        class="text-sm w-1/4 ml-2 px-2 py-1 bg-white rounded border focus:border-blue-500 transition-colors duration-150 outline-none"
+        v-model='color'>
+        <option v-for="fColor in colors" v-bind:key='fColor' v-bind:value='fColor'>{{fColor}}</option>
+      </select>
+      <button
+        :disabled='disabled'
+        class="text-sm ml-2 px-2 py-1 rounded bg-blue-500 hover:bg-blue-700 focus:bg-blue-700 text-white cursor-pointer disabled:bg-gray-200 disabled:text-gray-600 disabled:cursor-not-allowed"
+        type='submit'>Add</button>
+    </form>
+  `
+});
 
 Vue.component('category-list', {
   data: function() {
@@ -111,7 +170,7 @@ Vue.component('category-list', {
       this.$emit('filter', name);
     }
   },
-  props: ['categories'],
+  props: ['categories', 'submit'],
   template: `
     <div class="px-4 py-2 border-b overflow-x-auto">
       <div class="inline-flex items-center">
@@ -126,6 +185,7 @@ Vue.component('category-list', {
           v-on:click='click(name)'
           >
         </category-item>
+        <category-form @submit='submit' class='flex-none'></category-form>
       </div>
     </div>
   `
@@ -199,6 +259,9 @@ let app = new Vue({
         data.id = this.todos.length;
       }
       this.todos.push(data);
+    },
+    submitCat(category) {
+      this.$set(this.categories, category.name.toLowerCase(), category.color);
     },
     destroy(todo) {
       const index = this.todos.findIndex( el => el.id == todo );

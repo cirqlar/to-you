@@ -14,7 +14,7 @@
 
             </todo-form>
 
-            <category-list class="flex-none" v-on:filter="filt" v-bind:categories="categories">
+            <category-list class="flex-none" v-on:filter="filt" :submit='submitCat' v-bind:categories="categories">
 
             </category-list>
 

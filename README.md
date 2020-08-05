@@ -14,11 +14,11 @@ A category has:
 - [x] A color
 
 You can:
-- [X] Create a todo
-- [ ] Create a category
+- [x] Create a todo
+- [x] Create a category
 - [x] Delete a todo
 - [ ] Edit a todo
-- [ ] Edit a category
+- [x] Edit a category
 
 ## Checking out the code
 

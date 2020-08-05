@@ -13,3 +13,11 @@
 .template-auto-fill {
     grid-template-columns: repeat(auto-fill, minmax(200px, 300px));
 }
+
+.min-w-100px {
+    min-width: 100px;
+}
+
+.max-w-90vw {
+    max-width: 90vw;
+}
