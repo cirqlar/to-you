@@ -204,9 +204,14 @@ Vue.component('todo', {
   props: ['todo', 'color'],
   template: `
     <div
-      v-bind:class="[border, 'border-l-4']">
-      <h1>{{ todo.title }}</h1>
-      <button v-on:click.prevent="$emit('destroy', todo.id)">Delete</button>
+      v-bind:class="[border, 'border-l-4 flex px-4 py-2 rounded shadow-md items-center justify-between bg-white']">
+      <div>
+        <h1>{{ todo.title }}</h1>
+        <span class="text-sm text-gray-600">{{ todo.date }}</span>
+      </div>
+      <button
+        class="text-sm ml-2 px-2 py-1 rounded bg-red-500 hover:bg-red-700 focus:bg-red-700 text-white cursor-pointer"
+        @click.prevent="$emit('destroy', todo.id)">Delete</button>
     </div>
   `
 })
@@ -219,7 +224,7 @@ Vue.component('todo-list', {
   props: ['todos', 'destroy', 'categories'],
   template: `
     <div
-      class="grid template-auto-fill w-full justify-center mx-auto p-4 gap-3"
+      class="grid template-auto-fill w-full justify-center mx-auto p-4 gap-3 bg-gray-200"
       v-if='todos.length > 0'>
       <todo
         v-for="todo in todos"
@@ -230,7 +235,7 @@ Vue.component('todo-list', {
       </todo>
     </div>
     <div
-      class="w-full h-full text-center flex justify-center items-center text-gray-600"
+      class="w-full h-full text-center flex justify-center items-center text-gray-600 bg-gray-200"
       v-else>
       Nothing here yet.
     </div>
