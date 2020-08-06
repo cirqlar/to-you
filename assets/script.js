@@ -127,6 +127,7 @@ Vue.component('category-form', {
       disabled: true,
     }
   },
+  props: ['active'],
   computed: {
     category: function() {
       return {
@@ -142,6 +143,9 @@ Vue.component('category-form', {
       } else {
         this.disabled = false;
       }
+    },
+    active: function(val) {
+      this.name = this.active;
     }
   },
   methods: {
@@ -151,7 +155,7 @@ Vue.component('category-form', {
       } else {
         this.$emit('submit', this.category);
 
-        this.name = "";
+        this.name = this.active;
       }
     }
   },
@@ -187,7 +191,17 @@ Vue.component('category-list', {
         name = "";
       }
       this.active = name;
-      this.$emit('filter', name);
+    },
+    sub(category) {
+      this.submit(category);
+      if (this.active != "") {
+        this.active = "";
+      }
+    }
+  },
+  watch: {
+    active: function(val) {
+      this.$emit('filter', val);
     }
   },
   props: ['categories', 'submit'],
@@ -205,7 +219,7 @@ Vue.component('category-list', {
           @click='click(name)'
           >
         </category-item>
-        <category-form @submit='submit' class='flex-none'></category-form>
+        <category-form @submit='sub' class='flex-none' :active='active'></category-form>
       </div>
     </div>
   `
