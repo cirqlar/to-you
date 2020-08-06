@@ -21,3 +21,7 @@
 .max-w-90vw {
     max-width: 90vw;
 }
+
+.bottom-16 {
+    bottom: -4rem;
+}

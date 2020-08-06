@@ -3,13 +3,18 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>TO-You</title>
+        <link rel="icon" type="image/png" href="./assets/favicon.png" >
+
+        <title>To-You</title>
 
         <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
         <link href="./assets/style.css" rel="stylesheet">
     </head>
     <body class="h-screen relative">
         <div id="app" class="flex flex-col min-h-screen">
+            <div class="fixed flex -ml-16 py-4 items-start rounded-full bg-white justify-center bottom-16 left-0 bg-gray-400 w-32 h-32 transform rotate-45">
+                To You
+            </div>
             <todo-form :categories="categories" :editing='editing' :class="['flex-none']" @submit="submit">
 
             </todo-form>
