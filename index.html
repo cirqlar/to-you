@@ -10,15 +10,21 @@
     </head>
     <body class="h-screen relative">
         <div id="app" class="flex flex-col min-h-screen">
-            <todo-form v-bind:categories="categories" v-bind:class="['flex-none']" v-on:submit="submit">
+            <todo-form :categories="categories" :editing='editing' :class="['flex-none']" @submit="submit">
 
             </todo-form>
 
-            <category-list class="flex-none" v-on:filter="filt" :submit='submitCat' v-bind:categories="categories">
+            <category-list class="flex-none" @filter="filt" :submit='submitCat' :categories="categories">
 
             </category-list>
 
-            <todo-list v-bind:categories="categories" v-bind:class="['flex-auto']" v-bind:todos="filteredTodos" v-bind:destroy='destroy'>
+            <todo-list
+                :categories="categories"
+                :class="['flex-auto']"
+                :todos="filteredTodos"
+                :destroy='destroy'
+                :edit='edit'
+                :finish='finish'>
 
             </todo-list>
 
