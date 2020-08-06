@@ -18,6 +18,7 @@ You can:
 - [x] Create a category
 - [x] Delete a todo
 - [ ] Edit a todo
+- [ ] Complete a todo
 - [x] Edit a category
 
 ## Checking out the code
